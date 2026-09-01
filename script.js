@@ -201,3 +201,74 @@ if('IntersectionObserver' in window){
     });
   });
 })();
+
+// ============ SWIPER INITIALIZATION ============
+// Inicializar Swiper para el carousel de rubros
+if (typeof Swiper !== 'undefined') {
+  var carouselSwiper = new Swiper('.carousel-swiper', {
+    slidesPerView: 1.2,
+    spaceBetween: 16,
+    loop: false,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: true,
+      pauseOnMouseEnter: true
+    },
+    pagination: {
+      el: '.carousel-swiper .swiper-pagination',
+      clickable: true
+    },
+    navigation: {
+      nextEl: '.carousel-swiper .swiper-button-next',
+      prevEl: '.carousel-swiper .swiper-button-prev'
+    },
+    breakpoints: {
+      480: {
+        slidesPerView: 2,
+        spaceBetween: 16
+      },
+      640: {
+        slidesPerView: 3,
+        spaceBetween: 16
+      },
+      900: {
+        slidesPerView: 4,
+        spaceBetween: 16
+      },
+      1100: {
+        slidesPerView: 5,
+        spaceBetween: 16
+      }
+    }
+  });
+
+  // Inicializar Swiper para testimonios
+  var testimoniosSwiper = new Swiper('.testimonios-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 18,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: true,
+      pauseOnMouseEnter: true
+    },
+    pagination: {
+      el: '.testimonios-swiper .swiper-pagination',
+      clickable: true
+    },
+    navigation: {
+      nextEl: '.testimonios-swiper .swiper-button-next',
+      prevEl: '.testimonios-swiper .swiper-button-prev'
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 18
+      },
+      900: {
+        slidesPerView: 3,
+        spaceBetween: 18
+      }
+    }
+  });
+}

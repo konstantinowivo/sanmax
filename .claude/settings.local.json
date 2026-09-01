@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "WebFetch(domain:swiperjs.com)",
+      "Bash(dir \"C:\\Users\\PC\\Desktop\\sanmax\\src\\assets\" /B)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
