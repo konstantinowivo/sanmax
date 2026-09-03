@@ -2,11 +2,7 @@
   <section id="carrusel">
     <div class="wrap">
       <div class="section-head reveal">
-        <h2>Reparamos tu electrodoméstico</h2>
-        <p>
-          Tocá una categoría para ver el detalle del service, o desplazate para conocer
-          todos los rubros que atendemos.
-        </p>
+        <h2>EQUIPOS QUE REPARAMOS</h2>
       </div>
     </div>
 
@@ -16,7 +12,7 @@
           v-for="(appliance, index) in appliances"
           :key="appliance.id"
           class="appliance-card"
-          :class="getCardClass(index)"
+          :class="[getCardClass(index), `appliance-${appliance.id}`]"
           :style="getCardStyle(index)"
           :data-target="appliance.target"
           @click="handleCardClick(index, appliance.target)"
@@ -26,7 +22,6 @@
           </div>
           <div class="card-content">
             <h3>{{ appliance.name }}</h3>
-            <p>{{ appliance.services }} servicios</p>
           </div>
         </button>
       </div>
@@ -63,6 +58,7 @@ import aireAcondicionado from '@/assets/aire_acondicionado.png'
 import heladera from '@/assets/heladera.png'
 import freezer from '@/assets/freezer.png'
 import lavarropas from '@/assets/lavarropas.png'
+import secarropas from '@/assets/secarropas.png'
 import hornoElectrico from '@/assets/horno_electrico.png'
 import microondas from '@/assets/microondas.png'
 
@@ -106,7 +102,7 @@ const appliances = [
     name: 'Secarropas',
     services: 6,
     target: 'tk-secarropas',
-    image: lavarropas,
+    image: secarropas,
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="14" r="5"/><path d="M9.5 14a2.5 2.5 0 0 1 5 0"/></svg>'
   },
   {
@@ -213,7 +209,7 @@ const handleCardClick = (index, targetId) => {
 .section-head {
   text-align: center;
   max-width: 700px;
-  margin: 0 auto 30px;
+  margin: 0 auto 20px;
 }
 
 .section-head .plate-tag {
@@ -228,10 +224,10 @@ const handleCardClick = (index, targetId) => {
 }
 
 .section-head h2 {
-  font-size: 36px;
+  font-size: 54px;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 16px;
+  margin-bottom: 0;
   line-height: 1.2;
 }
 
@@ -244,7 +240,7 @@ const handleCardClick = (index, targetId) => {
 .carousel-container {
   position: relative;
   width: 100%;
-  padding: 80px 0;
+  padding: 20px 0;
   overflow: hidden;
 }
 

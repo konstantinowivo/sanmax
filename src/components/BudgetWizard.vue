@@ -28,7 +28,7 @@
         </div>
 
         <div class="wizard-panels">
-          <div v-show="currentStep === 1" class="wizard-panel is-active" data-panel="1">
+          <div :class="['wizard-panel', { 'is-active': currentStep === 1 }]" data-panel="1">
             <h3 class="wizard-q">¿Qué equipo necesitás reparar?</h3>
             <div class="option-grid">
               <button
@@ -58,7 +58,7 @@
             </div>
           </div>
 
-          <div v-show="currentStep === 2" class="wizard-panel" data-panel="2">
+          <div :class="['wizard-panel', { 'is-active': currentStep === 2 }]" data-panel="2">
             <h3 class="wizard-q">
               ¿Qué le pasa: <span id="equipo-elegido">{{ state.equipoLabel || 'tu equipo' }}</span>?
             </h3>
@@ -91,14 +91,14 @@
                 class="btn btn-accent"
                 id="btn-step2-next"
                 :disabled="!canAdvanceFromStep2"
-                @click="goToStep(3)"
+                @click="nextToStep3"
               >
                 Siguiente
               </button>
             </div>
           </div>
 
-          <div v-show="currentStep === 3" class="wizard-panel" data-panel="3">
+          <div :class="['wizard-panel', { 'is-active': currentStep === 3 }]" data-panel="3">
             <h3 class="wizard-q">Tus datos y el horario que preferís</h3>
             <div class="form-grid">
               <label>
@@ -140,7 +140,7 @@
             </div>
           </div>
 
-          <div v-show="currentStep === 4" class="wizard-panel" data-panel="4">
+          <div :class="['wizard-panel', { 'is-active': currentStep === 4 }]" data-panel="4">
             <h3 class="wizard-q">Así queda tu mensaje</h3>
             <div class="wa-mock-label">📱 Así se va a ver en tu WhatsApp</div>
             <div class="wa-mock">
@@ -262,7 +262,13 @@ const selectEquipo = (equipo) => {
 }
 
 const nextToStep2 = () => {
-  goToStep(2)
+  currentStep.value = 2
+  if (maxReached.value < 2) maxReached.value = 2
+}
+
+const nextToStep3 = () => {
+  currentStep.value = 3
+  if (maxReached.value < 3) maxReached.value = 3
 }
 
 const selectProblema = (problema) => {
@@ -275,7 +281,6 @@ const selectProblema = (problema) => {
 const goToStep = (n) => {
   if (n > maxReached.value) return
   currentStep.value = n
-  if (n > maxReached.value) maxReached.value = n
 }
 
 const goToStep4 = () => {

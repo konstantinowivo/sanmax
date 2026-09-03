@@ -12,10 +12,11 @@
 
       <div class="tickets">
         <details
-          v-for="ticket in tickets"
+          v-for="(ticket, index) in tickets"
           :key="ticket.id"
           :id="ticket.id"
           class="ticket"
+          :class="{ 'ticket-hidden-mobile': !showAllTickets && index >= 3 }"
           :open="ticket.open"
         >
           <summary>
@@ -31,17 +32,30 @@
           <div class="ticket-body">
             <ul class="ticket-list">
               <li v-for="(service, idx) in ticket.services" :key="idx">
-                <span class="num">{{ service.code }}</span>{{ service.name }}
+                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                {{ service.name }}
               </li>
             </ul>
           </div>
         </details>
+      </div>
+
+      <div v-if="!showAllTickets && tickets.length > 3" class="show-more-container">
+        <button class="btn btn-outline" @click="showAllTickets = true">
+          Ver más equipos
+        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
+const showAllTickets = ref(false)
+
 const tickets = [
   {
     id: 'tk-ac',
@@ -49,13 +63,13 @@ const tickets = [
     title: 'Aire acondicionado',
     open: true,
     services: [
-      { code: 'AC—01', name: 'Instalación de split' },
-      { code: 'AC—02', name: 'Carga de gas' },
-      { code: 'AC—03', name: 'Service preventivo / limpieza' },
-      { code: 'AC—04', name: 'Reparación de placa electrónica' },
-      { code: 'AC—05', name: 'Cambio de motor / turbina' },
-      { code: 'AC—06', name: 'Desinstalación y reinstalación' },
-      { code: 'AC—07', name: 'Instalación multisplit / VRF' }
+      { name: 'Instalación de split' },
+      { name: 'Carga de gas' },
+      { name: 'Service preventivo / limpieza' },
+      { name: 'Reparación de placa electrónica' },
+      { name: 'Cambio de motor / turbina' },
+      { name: 'Desinstalación y reinstalación' },
+      { name: 'Instalación multisplit / VRF' }
     ]
   },
   {
@@ -64,13 +78,13 @@ const tickets = [
     title: 'Heladera',
     open: false,
     services: [
-      { code: 'HE—01', name: 'Cambio de motocompresor' },
-      { code: 'HE—02', name: 'Carga de gas refrigerante' },
-      { code: 'HE—03', name: 'Cambio de termostato' },
-      { code: 'HE—04', name: 'Cambio de burlete' },
-      { code: 'HE—05', name: 'Limpieza de no-frost' },
-      { code: 'HE—06', name: 'Reparación de placa electrónica' },
-      { code: 'HE—07', name: 'Cambio de resistencia de descongelado' }
+      { name: 'Cambio de motocompresor' },
+      { name: 'Carga de gas refrigerante' },
+      { name: 'Cambio de termostato' },
+      { name: 'Cambio de burlete' },
+      { name: 'Limpieza de no-frost' },
+      { name: 'Reparación de placa electrónica' },
+      { name: 'Cambio de resistencia de descongelado' }
     ]
   },
   {
@@ -79,12 +93,12 @@ const tickets = [
     title: 'Freezer',
     open: false,
     services: [
-      { code: 'FR—01', name: 'Cambio de motocompresor' },
-      { code: 'FR—02', name: 'Carga de gas refrigerante' },
-      { code: 'FR—03', name: 'Cambio de termostato' },
-      { code: 'FR—04', name: 'Cambio de burlete' },
-      { code: 'FR—05', name: 'Reparación de placa electrónica' },
-      { code: 'FR—06', name: 'Service de exhibidoras / comerciales' }
+      { name: 'Cambio de motocompresor' },
+      { name: 'Carga de gas refrigerante' },
+      { name: 'Cambio de termostato' },
+      { name: 'Cambio de burlete' },
+      { name: 'Reparación de placa electrónica' },
+      { name: 'Service de exhibidoras / comerciales' }
     ]
   },
   {
@@ -93,14 +107,14 @@ const tickets = [
     title: 'Lavarropas',
     open: false,
     services: [
-      { code: 'LR—01', name: 'Cambio de bomba de agua' },
-      { code: 'LR—02', name: 'Cambio de electroválvula' },
-      { code: 'LR—03', name: 'Cambio de carbones del motor' },
-      { code: 'LR—04', name: 'Cambio de rulemanes' },
-      { code: 'LR—05', name: 'Reparación de placa electrónica' },
-      { code: 'LR—06', name: 'Destape de filtro y mangueras' },
-      { code: 'LR—07', name: 'Cambio de correa' },
-      { code: 'LR—08', name: 'Cambio de amortiguadores' }
+      { name: 'Cambio de bomba de agua' },
+      { name: 'Cambio de electroválvula' },
+      { name: 'Cambio de carbones del motor' },
+      { name: 'Cambio de rulemanes' },
+      { name: 'Reparación de placa electrónica' },
+      { name: 'Destape de filtro y mangueras' },
+      { name: 'Cambio de correa' },
+      { name: 'Cambio de amortiguadores' }
     ]
   },
   {
@@ -109,12 +123,12 @@ const tickets = [
     title: 'Secarropas',
     open: false,
     services: [
-      { code: 'SR—01', name: 'Cambio de motor / freno' },
-      { code: 'SR—02', name: 'Cambio de resistencia' },
-      { code: 'SR—03', name: 'Cambio de termostato' },
-      { code: 'SR—04', name: 'Reparación de centrífugo' },
-      { code: 'SR—05', name: 'Reparación de secarropas a gas' },
-      { code: 'SR—06', name: 'Limpieza de filtros y conductos' }
+      { name: 'Cambio de motor / freno' },
+      { name: 'Cambio de resistencia' },
+      { name: 'Cambio de termostato' },
+      { name: 'Reparación de centrífugo' },
+      { name: 'Reparación de secarropas a gas' },
+      { name: 'Limpieza de filtros y conductos' }
     ]
   },
   {
@@ -123,13 +137,13 @@ const tickets = [
     title: 'Horno eléctrico',
     open: false,
     services: [
-      { code: 'HO—01', name: 'Cambio de resistencias (superior / inferior / grill)' },
-      { code: 'HO—02', name: 'Cambio de termostato' },
-      { code: 'HO—03', name: 'Cambio de turbina del horno' },
-      { code: 'HO—04', name: 'Cambio de burlete del horno' },
-      { code: 'HO—05', name: 'Cambio de luz interior' },
-      { code: 'HO—06', name: 'Reparación de placa electrónica' },
-      { code: 'HO—07', name: 'Reparación de panel táctil' }
+      { name: 'Cambio de resistencias (superior / inferior / grill)' },
+      { name: 'Cambio de termostato' },
+      { name: 'Cambio de turbina del horno' },
+      { name: 'Cambio de burlete del horno' },
+      { name: 'Cambio de luz interior' },
+      { name: 'Reparación de placa electrónica' },
+      { name: 'Reparación de panel táctil' }
     ]
   },
   {
@@ -138,12 +152,12 @@ const tickets = [
     title: 'Microondas',
     open: false,
     services: [
-      { code: 'MW—01', name: 'Cambio de magnetrón' },
-      { code: 'MW—02', name: 'Cambio de fusible' },
-      { code: 'MW—03', name: 'Cambio de transformador de alta tensión' },
-      { code: 'MW—04', name: 'Reparación de plato giratorio' },
-      { code: 'MW—05', name: 'Cambio de panel táctil' },
-      { code: 'MW—06', name: 'Limpieza interior' }
+      { name: 'Cambio de magnetrón' },
+      { name: 'Cambio de fusible' },
+      { name: 'Cambio de transformador de alta tensión' },
+      { name: 'Reparación de plato giratorio' },
+      { name: 'Cambio de panel táctil' },
+      { name: 'Limpieza interior' }
     ]
   }
 ]

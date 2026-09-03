@@ -3,7 +3,7 @@
     <div class="wrap footer-grid">
       <div class="footer-brand reveal">
         <span class="logo">
-          <span class="word" style="color:#fff;">San Max</span>
+          <span class="word" style="color:#fff;">SANMAX</span>
           <span class="tag">Service técnico</span>
         </span>
         <p>
@@ -63,14 +63,14 @@
           src="https://maps.google.com/maps?q=C%C3%B3rdoba%2C%20Argentina&t=&z=14&ie=UTF8&iwloc=&output=embed"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Ubicación de San Max en el mapa"
+          title="Ubicación de SANMAX en el mapa"
         ></iframe>
       </div>
     </div>
 
     <div class="wrap">
       <div class="foot-bottom">
-        <span>© 2026 San Max — Service técnico de electrodomésticos</span>
+        <span>© 2026 SANMAX — Service técnico de electrodomésticos</span>
         <span>Córdoba, Argentina</span>
       </div>
     </div>
